@@ -41,14 +41,13 @@ int main() {
               << std::endl;
 
   // Test function 3
-  auto f3 = [](double x) { return std::exp(-x*x); };
+  auto f3 = [](double x) { return x*x*x*x*std::log(x + std::sqrt(x*x + 1.0)); };
 
   // Run adaptive integration
-  // auto result3 = gauss_quadrature_10(f3, 0.1, 1.0);
-  auto result3 = gauss_quadrature_10(f3, 0.0, 1.0);
+  auto result3 = gauss_quadrature_10(f3, 0.0, 2.0);
 
   // Check result
-  double I3 = 0.746824132812;
+  double I3 = 8.15336411984;
   if (std::abs(result3 - I3) < eps) {
     std::cout << "Test Case 3: PASS, ";
   } else {
