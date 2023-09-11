@@ -45,7 +45,7 @@ $$
 \frac{d^2\theta}{dt^2} + \frac{g}{L}\sin\theta = 0
 $$
 
-You are probably familiar with this equation in the small angle approximation: $\sin\theta\approx \theta$. In that case, the solution to the differential equation is $\theta(t) = A\sin(\omega t)$ where $\omega = \sqrt{g/L}$ is the angular frequency of the simple pendulum.
+You are probably familiar with this equation in the small angle approximation: $\sin\theta\approx \theta$. In that case, the solution to the differential equation is $\theta(t) = A\sin(\omega t)$ where $\omega = \sqrt{g/L}$ is the angular frequency of the simple pendulum. The period of this pendulum is $T_0 = 2\pi\sqrt{L/g}$.
 
 Without small angle approximation, the equation is still relatively easy to solve. Multiply the equation by $d\theta/dt$, you can rewrite the first term as $(1/2)d(\dot{theta})^2/dt$, where $\dot{\theta} = d\theta/dt$. The equation becomes a total derivative:
 
@@ -97,4 +97,4 @@ th_max = pi/3:   T/T0 = [...]
 th_max = pi/2:   T/T0 = [...]
 ```
 
-$T_0$ is defined to be the period of the simple pendulum, $T_0 = 2\pi\sqrt{L/g}$. You can access the value of $\pi$ using `M_PI`, which is defined in the header `<cmath>`. You should see that with larger $\theta_\mathrm{max}$, the period gets progressively larger than 1. Write your program in `problem3.cpp`, then add and commit it to the repo. Include the output of this program in a separate text file `problem3.txt` and commit to the repo too.
+$T_0$ is defined to be the period of the simple pendulum, $T_0 = 2\pi\sqrt{L/g}$. You can access the value of $\pi$ using `M_PI`, which is defined in the header `<cmath>`. You should see that the result is extremely close to 1 when $\theta_\mathrm{max}$ is small, but with larger $\theta_\mathrm{max}$, the period gets progressively larger than 1. Write your program in `problem3.cpp`, then add and commit it to the repo. Include the output of this program in a separate text file `problem3.txt` and commit to the repo too.
