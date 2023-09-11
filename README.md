@@ -47,7 +47,7 @@ $$
 
 You are probably familiar with this equation in the small angle approximation: $\sin\theta\approx \theta$. In that case, the solution to the differential equation is $\theta(t) = A\sin(\omega t)$ where $\omega = \sqrt{g/L}$ is the angular frequency of the simple pendulum. The period of this pendulum is $T_0 = 2\pi\sqrt{L/g}$.
 
-Without small angle approximation, the equation is still relatively easy to solve. Multiply the equation by $d\theta/dt$, you can rewrite the first term as $(1/2)d(\dot{theta})^2/dt$, where $\dot{\theta} = d\theta/dt$. The equation becomes a total derivative:
+Without small angle approximation, the equation is still relatively easy to solve. Multiply the equation by $d\theta/dt$, you can rewrite the first term as $(1/2)d(\dot{\theta})^2/dt$, where $\dot{\theta} = d\theta/dt$. The equation becomes a total derivative:
 
 $$
 \frac{d}{dt}\left[\frac{1}{2}\dot{\theta}^2 - \frac{g}{L}\cos\theta\right] = 0
