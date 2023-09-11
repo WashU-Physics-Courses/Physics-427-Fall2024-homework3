@@ -13,14 +13,14 @@ std::tuple<bool, double> adaptive_simpson(const F& f, double a, double b, double
 
 Similar to the last homework, we are returning a `bool` together with our solution to indicate whether the iteration converged, or whether there is some issue encountered along the way (e.g. hitting NaN). Implement this using an adaptive trapezoidal rule as discussed in class. Stop the iteration when $|\varepsilon_n/S'_n| < \mathrm{tolerance}$.
 
-Since you are implementing the Simpson's rule using the trapezoidal rule, it may be a good idea to implement a function to assist that:
+Since you are implementing the Simpson's rule using the trapezoidal rule, it may be a good idea to implement a function to assist with that:
 
 ``` c++
 template <typename F>
 double trapezoidal_next(const F& f, double a, double b, double dx, double Sn);
 ```
 
-It takes the same given function $f$, the same interval $[a, b]$, the current $\Delta x$, the current trapezoidal estimate $S_n$. It should return the next refined estimate $S_{n+1}$ by evaluating the function $f$ at additional points and using the already known estimate $S_n$. This helper function can help tremendously when you use it to implement the Simpson's rule. If you can find a way to implement Simpson's rule without using this helper function, feel free to do that too. As long as the function `adaptive_simpson` works correctly, you will get the full points for this problem.
+It takes the same given function $f$, the same interval $[a, b]$, the current level of $\Delta x$, and the current trapezoidal estimate $S_n$. It should return the next refined estimate $S_{n+1}$ by evaluating the function $f$ at additional points and using the already known estimate $S_n$. This helper function can help tremendously when you use it to implement the Simpson's rule. If you can find a way to implement Simpson's rule without using this helper function, feel free to do that too. As long as the function `adaptive_simpson` works correctly, you will get the full points for this problem.
 
 I have included a simple test file `test1.cpp` to help you debug your code. As usual, feel free to design more test cases to check the convergence and behavior of your integration function. When you are done, add and commit your `problem1.h` to the repo.
 
@@ -76,7 +76,7 @@ The full period is simply 4 times this quantity, $T = 4t_{1/4}$. Unfortunately, 
 The integral can be converted to a more well-behaved one by the following substitution: define $k = \sin(\theta_\mathrm{max}/2)$, and $k\sin\phi = \sin(\theta/2)$. We can then write:
 
 $$
-d\theta = \frac{2k\cos\phi\,d\phi}{\cos(\theta/2)}
+d\theta = \frac{2k\cos\phi}{\cos(\theta/2)}d\phi
 $$
 
 Plugging this back into the above integral and realizing that $\cos\theta = 1 - 2\sin^2(\theta/2)$, we get:
@@ -97,4 +97,4 @@ th_max = pi/3:   T/T0 = [...]
 th_max = pi/2:   T/T0 = [...]
 ```
 
-$T_0$ is defined to be the period of the simple pendulum, $T_0 = 2\pi\sqrt{L/g}$ so that the result is dimensionless. You can access the value of $\pi$ using `M_PI`, which is defined in the header `<cmath>`. You should see that with larger $\theta_\mathrm{max}$, the period gets progressively larger than 1. Write your program in `problem3.cpp`, then add and commit it to the repo. 
+$T_0$ is defined to be the period of the simple pendulum, $T_0 = 2\pi\sqrt{L/g}$. You can access the value of $\pi$ using `M_PI`, which is defined in the header `<cmath>`. You should see that with larger $\theta_\mathrm{max}$, the period gets progressively larger than 1. Write your program in `problem3.cpp`, then add and commit it to the repo. Include the output of this program in a separate text file `problem3.txt` and commit to the repo too.
