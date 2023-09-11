@@ -42,5 +42,23 @@ int main() {
             << std::get<1>(result2) << ", expected to be around " << I2
             << std::endl;
 
+  // Test function 3
+  auto f3 = [](double x) { return std::exp(-x*x); };
+
+  // Run adaptive integration
+  auto result3 = adaptive_simpson(f3, 0.0, 1.0, eps * 0.1);
+
+  // Check result
+  double I3 = 0.746824132812;
+  if (std::get<0>(result3) == true &&
+      std::abs(std::get<1>(result3) - I3) < eps) {
+    std::cout << "Test Case 3: PASS, ";
+  } else {
+    std::cout << "Test Case 3: FAIL, ";
+  }
+  std::cout << "integral is " << std::setprecision(12)
+            << std::get<1>(result3) << ", expected to be around " << I3
+            << std::endl;
+
   return 0;
 }

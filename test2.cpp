@@ -40,6 +40,23 @@ int main() {
               << result2 << ", expected to be around " << I2
               << std::endl;
 
-  // double pi = M_PI;
+  // Test function 3
+  auto f3 = [](double x) { return std::exp(-x*x); };
+
+  // Run adaptive integration
+  // auto result3 = gauss_quadrature_10(f3, 0.1, 1.0);
+  auto result3 = gauss_quadrature_10(f3, 0.0, 1.0);
+
+  // Check result
+  double I3 = 0.746824132812;
+  if (std::abs(result3 - I3) < eps) {
+    std::cout << "Test Case 3: PASS, ";
+  } else {
+    std::cout << "Test Case 3: FAIL, ";
+  }
+  std::cout << "integral is " << std::setprecision(12)
+            << result3 << ", expected to be around " << I3
+            << std::endl;
+
   return 0;
 }
