@@ -35,7 +35,7 @@ double gauss_quadrature_10(const F& f, double a, double b);
 
 Notice that the function signature is significantly simpler than the adaptive Simpson's rule. This is because we don't need to carry out any iteration at all, and the final result has a fixed (very high) precision.
 
-I have included a simple test file `test2.cpp` to help you debug your code. Similar to `test1.cpp`, it always prints out your integration result and the target result. Compare for yourself how Gauss quadrature stacks up with the iterative refinement method you implemented above. Finally, when you are done, add and commit your `problem2.h` to the repo.
+I have included a simple test file `test2.cpp` to help you debug your code, which uses the same test cases as `test1.cpp`. Similar to `test1.cpp`, it always prints out your integration result and the target result. Compare for yourself how Gauss quadrature stacks up with the iterative refinement method you implemented above. Finally, when you are done, add and commit your `problem2.h` to the repo.
 
 ## 3. Period of a Physical Pendulum
 
