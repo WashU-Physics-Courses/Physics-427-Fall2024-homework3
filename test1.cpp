@@ -1,64 +1,71 @@
 #include "problem1.h"
+
+#include <cmath>
 #include <iostream>
-#include <iomanip>
+#include <vector>
+
+using namespace std;
 
 int main() {
-  // Error tolerance for these tests
-  double eps = 1e-9;
+  double dx = 0.2;
+  vector<double> xs = {0.0, dx, 2.0 * dx, 3.0 * dx, 4.0 * dx, 5.0 * dx};
 
-  // Test function 1
-  auto f1 = [](double x) { return std::pow(x, 5) - 4.0 * x*x*x + 2.0; };
+  auto f = [](double x) { return sin(x); };
 
-  // Run adaptive integration
-  auto result1 = adaptive_simpson(f1, 1.0, 2.0, eps * 0.1);
-
-  // Check result
-  double I1 = -2.5;
-  if (std::get<0>(result1) == true &&
-      std::abs(std::get<1>(result1) - I1) < eps) {
-    std::cout << "Test Case 1: PASS, ";
-  } else {
-    std::cout << "Test Case 1: FAIL, ";
+  vector<double> ys(xs.size());
+  for (int i = 0; i < xs.size(); i++) {
+    ys[i] = f(xs[i]);
   }
-  std::cout << "integral is " << std::setprecision(12)
-              << std::get<1>(result1) << ", expected to be around " << I1
-              << std::endl;
 
-  // Test function 2
-  auto f2 = [](double x) { return std::sin(x) + std::exp(0.1*x)*x*x*x/(x*x - 1.0); };
+  // Check end points
+  double eps = 1e-10;
 
-  // Run adaptive integration
-  auto result2 = adaptive_simpson(f2, 2.0, 3.0, eps * 0.1);
-
-  // Check result
-  double I2 = 4.42293024935;
-  if (std::get<0>(result2) == true &&
-      std::abs(std::get<1>(result2) - I2) < eps) {
-    std::cout << "Test Case 2: PASS, ";
+  double x0 = 0.0;
+  double f0_ref = 0.0;
+  double f0 = interpolate(x0, xs, ys);
+  if (abs(f0 - f0_ref) > eps) {
+    cout << "FAILED: at x = " << x0 << ", interpolated f(x) = " << f0
+         << ", expected " << f0_ref << endl;
   } else {
-    std::cout << "Test Case 2: FAIL, "; 
+    cout << "PASSED: at x = " << x0 << ", interpolated f(x) = " << f0
+         << ", expected " << f0_ref << endl;
   }
-  std::cout << "integral is " << std::setprecision(12)
-            << std::get<1>(result2) << ", expected to be around " << I2
-            << std::endl;
 
-  // Test function 3
-  auto f3 = [](double x) { return x*x*x*x*std::log(x + std::sqrt(x*x + 1.0)); };
-
-  // Run adaptive integration
-  auto result3 = adaptive_simpson(f3, 0.0, 2.0, eps * 0.1);
-
-  // Check result
-  double I3 = 8.15336411984;
-  if (std::get<0>(result3) == true &&
-      std::abs(std::get<1>(result3) - I3) < eps) {
-    std::cout << "Test Case 3: PASS, ";
+  double x1 = 1.0;
+  double f1_ref = sin(xs.back());
+  double f1 = interpolate(x1, xs, ys);
+  if (abs(f1 - f1_ref) > eps) {
+    cout << "FAILED: at x = " << x1 << ", interpolated f(x) = " << f1
+         << ", expected " << f1_ref << endl;
   } else {
-    std::cout << "Test Case 3: FAIL, ";
+    cout << "PASSED: at x = " << x1 << ", interpolated f(x) = " << f1
+         << ", expected " << f1_ref << endl;
   }
-  std::cout << "integral is " << std::setprecision(12)
-            << std::get<1>(result3) << ", expected to be around " << I3
-            << std::endl;
+
+  // Check interior points
+  double x2 = 0.5;
+  double f2_ref = 0.5 * (sin(2.0 * dx) + sin(3.0 * dx));
+  double f2 = interpolate(x2, xs, ys);
+
+  if (abs(f2 - f2_ref) > eps) {
+    cout << "FAILED: at x = " << x2 << ", interpolated f(x) = " << f2
+         << ", expected " << f2_ref << endl;
+  } else {
+    cout << "PASSED: at x = " << x2 << ", interpolated f(x) = " << f2
+         << ", expected " << f2_ref << endl;
+  }
+
+  double x3 = 0.77;
+  double f3_ref = 0.15 * sin(3.0 * dx) + 0.85 * sin(4.0 * dx);
+  double f3 = interpolate(x3, xs, ys);
+
+  if (abs(f3 - f3_ref) > eps) {
+    cout << "FAILED: at x = " << x3 << ", interpolated f(x) = " << f3
+         << ", expected " << f3_ref << endl;
+  } else {
+    cout << "PASSED: at x = " << x3 << ", interpolated f(x) = " << f3
+         << ", expected " << f3_ref << endl;
+  }
 
   return 0;
 }
